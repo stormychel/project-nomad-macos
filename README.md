@@ -17,7 +17,7 @@
 ## Fork Status
 This repository is a macOS-maintained fork of the original Project N.O.M.A.D. codebase, distributed under the same [Apache License 2.0](LICENSE). The upstream macOS contribution was proposed in [Crosstalk-Solutions/project-nomad#618](https://github.com/Crosstalk-Solutions/project-nomad/pull/618), which was closed on April 1, 2026 without being merged. As a result, macOS support for this fork will be maintained here going forward.
 
-If you need help with the macOS fork, open an issue in this repository or contact Michel Storms via [github.com/stormychel](https://github.com/stormychel).
+If you need help with the macOS fork, open an issue in this repository or contact Michel Storms via michelstorms.dev [github.com/stormychel](https://github.com/stormychel).
 Project names and marks remain the property of their respective owners; this fork uses the original name only to identify the upstream project it is derived from.
 
 Project N.O.M.A.D. is a self-contained, offline-first knowledge and education server packed with critical tools, knowledge, and AI to keep you informed and empowered—anytime, anywhere.
