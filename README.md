@@ -17,21 +17,71 @@
 Project N.O.M.A.D. is a self-contained, offline-first knowledge and education server packed with critical tools, knowledge, and AI to keep you informed and empowered—anytime, anywhere.
 
 ## Installation & Quickstart
-Project N.O.M.A.D. can be installed on any Debian-based operating system (we recommend Ubuntu). Installation is completely terminal-based, and all tools and resources are designed to be accessed through the browser, so there's no need for a desktop environment if you'd rather setup N.O.M.A.D. as a "server" and access it through other clients.
+Project N.O.M.A.D. can be installed on Debian-based Linux systems and now has an installer path for macOS. Installation is completely terminal-based, and all tools and resources are designed to be accessed through the browser, so there's no need for a desktop environment if you'd rather setup N.O.M.A.D. as a "server" and access it through other clients.
 
-*Note: sudo/root privileges are required to run the install script*
+*Note: Debian/Linux install uses sudo/root privileges. The macOS installer path uses a user-writable install directory by default.*
 
-### Quick Install (Debian-based OS Only)
+### Prerequisites
+
+#### Debian-based Linux
+- `bash`
+- `curl`
+- `sudo` access
+- internet connection during installation
+
+The installer will install Docker for you if it is missing.
+
+#### macOS
+- `bash`
+- `curl`
+- Docker Desktop installed
+- Docker Desktop running
+- `docker` command available in your shell
+- internet connection during installation
+
+Install Docker Desktop with Homebrew:
+```bash
+brew install --cask docker
+open -a Docker
+```
+
+Verify Docker before running the installer:
+```bash
+docker --version
+docker info
+```
+
+### Quick Install (Debian-based Linux)
 ```bash
 sudo apt-get update && sudo apt-get install -y curl && curl -fsSL https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/install_nomad.sh -o install_nomad.sh && sudo bash install_nomad.sh
 ```
 
 Project N.O.M.A.D. is now installed on your device! Open a browser and navigate to `http://localhost:8080` (or `http://DEVICE_IP:8080`) to start exploring!
 
+### Quick Install (macOS)
+Install Docker Desktop first, make sure it is running, then run:
+```bash
+curl -fsSL https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/install_nomad.sh -o install_nomad.sh && bash install_nomad.sh
+```
+
+On macOS, the installer targets the management stack and uses a user-writable default install directory. Linux-specific host integrations such as the disk collector and NVIDIA runtime checks are skipped.
+
+After installation:
+- Open `http://localhost:8080`
+- Open `http://localhost:9999` for container logs
+- If a content page says Kiwix is not installed, use the new `Install Kiwix` button directly from the page or install it from Settings -> Apps
+
+Compatibility notes for macOS:
+- Docker Desktop is required
+- The default install directory is `~/.project-nomad`
+- Apple Silicon currently runs the published `linux/amd64` images under emulation
+- If you already run Ollama locally on macOS, N.O.M.A.D. now keeps its internal Ollama service off the host `11434` port to avoid collisions
+- Linux-only host integrations such as disk collector and NVIDIA runtime setup are intentionally skipped
+
 For a complete step-by-step walkthrough (including Ubuntu installation), see the [Installation Guide](https://www.projectnomad.us/install).
 
 ### Advanced Installation
-For more control over the installation process, copy and paste the [Docker Compose template](https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/management_compose.yaml) into a `docker-compose.yml` file and customize it to your liking (be sure to replace any placeholders with your actual values). Then, run `docker compose up -d` to start the Command Center and its dependencies. Note: this method is recommended for advanced users only, as it requires familiarity with Docker and manual configuration before starting.
+For more control over the installation process, copy and paste the [Linux Docker Compose template](https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/management_compose.yaml) or the macOS template at [install/management_compose.macos.yaml](install/management_compose.macos.yaml) into a `docker-compose.yml` file and customize it to your liking (be sure to replace any placeholders with your actual values). Then, run `docker compose up -d` to start the Command Center and its dependencies. Note: this method is recommended for advanced users only, as it requires familiarity with Docker and manual configuration before starting.
 
 ## How It Works
 N.O.M.A.D. is a management UI ("Command Center") and API that orchestrates a collection of containerized tools and resources via [Docker](https://www.docker.com/). It handles installation, configuration, and updates for everything — so you don't have to.
@@ -72,7 +122,7 @@ At it's core, however, N.O.M.A.D. is still very lightweight. For a barebones ins
 - Processor: 2 GHz dual-core processor or better
 - RAM: 4GB system memory
 - Storage: At least 5 GB free disk space
-- OS: Debian-based (Ubuntu recommended)
+- OS: Debian-based Linux or macOS
 - Stable internet connection (required during install only)
 
 To run LLM's and other included AI tools:
@@ -82,7 +132,7 @@ To run LLM's and other included AI tools:
 - RAM: 32 GB system memory
 - Graphics: NVIDIA RTX 3060 or AMD equivalent or better (more VRAM = run larger models)
 - Storage: At least 250 GB free disk space (preferably on SSD)
-- OS: Debian-based (Ubuntu recommended)
+- OS: Debian-based Linux
 - Stable internet connection (required during install only)
 
 **For detailed build recommendations at three price points ($150–$1,000+), see the [Hardware Guide](https://www.projectnomad.us/hardware).**
@@ -120,28 +170,48 @@ Contributions are welcome and appreciated! Please see [CONTRIBUTING.md](CONTRIBU
 Project N.O.M.A.D. is licensed under the [Apache License 2.0](LICENSE).
 
 ## Helper Scripts
-Once installed, Project N.O.M.A.D. has a few helper scripts should you ever need to troubleshoot issues or perform maintenance that can't be done through the Command Center. All of these scripts are found in Project N.O.M.A.D.'s install directory, `/opt/project-nomad`
+Once installed, Project N.O.M.A.D. has a few helper scripts should you ever need to troubleshoot issues or perform maintenance that can't be done through the Command Center. All of these scripts are found in Project N.O.M.A.D.'s install directory. On Debian/Linux the default is `/opt/project-nomad`; on macOS the default installer path is `~/.project-nomad`.
 
 ###
 
 ###### Start Script - Starts all installed project containers
+Debian/Linux:
 ```bash
 sudo bash /opt/project-nomad/start_nomad.sh
+```
+macOS:
+```bash
+bash ~/.project-nomad/start_nomad.sh
 ```
 ###
 
 ###### Stop Script - Stops all installed project containers
+Debian/Linux:
 ```bash
 sudo bash /opt/project-nomad/stop_nomad.sh
+```
+macOS:
+```bash
+bash ~/.project-nomad/stop_nomad.sh
 ```
 ###
 
 ###### Update Script - Attempts to pull the latest images for the Command Center and its dependencies (i.e. mysql) and recreate the containers. Note: this *only* updates the Command Center containers. It does not update the installable application containers - that should be done through the Command Center UI
+Debian/Linux:
 ```bash
 sudo bash /opt/project-nomad/update_nomad.sh
 ```
+macOS:
+```bash
+bash ~/.project-nomad/update_nomad.sh
+```
 
 ###### Uninstall Script - Need to start fresh? Use the uninstall script to make your life easy. Note: this cannot be undone!
+Debian/Linux:
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/uninstall_nomad.sh -o uninstall_nomad.sh && sudo bash uninstall_nomad.sh
+```
+macOS:
+```bash
+curl -fsSL https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/uninstall_nomad.sh -o uninstall_nomad.sh && bash uninstall_nomad.sh
 ```
