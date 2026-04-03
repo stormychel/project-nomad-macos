@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/admin/public/project_nomad_logo.png" width="200" height="200"/>
+<img src="https://raw.githubusercontent.com/stormychel/project-nomad-macos/refs/heads/main/admin/public/project_nomad_logo.png" width="200" height="200"/>
 
 # Project N.O.M.A.D.
 ### Node for Offline Media, Archives, and Data
@@ -13,6 +13,12 @@
 </div>
 
 ---
+
+## Fork Status
+This repository is a macOS-maintained fork of the original Project N.O.M.A.D. codebase, distributed under the same [Apache License 2.0](LICENSE). The upstream macOS contribution was proposed in [Crosstalk-Solutions/project-nomad#618](https://github.com/Crosstalk-Solutions/project-nomad/pull/618), which was closed on April 1, 2026 without being merged. As a result, macOS support for this fork will be maintained here going forward.
+
+If you need help with the macOS fork, open an issue in this repository or contact Michel Storms via [github.com/stormychel](https://github.com/stormychel).
+Project names and marks remain the property of their respective owners; this fork uses the original name only to identify the upstream project it is derived from.
 
 Project N.O.M.A.D. is a self-contained, offline-first knowledge and education server packed with critical tools, knowledge, and AI to keep you informed and empowered—anytime, anywhere.
 
@@ -53,7 +59,7 @@ docker info
 
 ### Quick Install (Debian-based Linux)
 ```bash
-sudo apt-get update && sudo apt-get install -y curl && curl -fsSL https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/install_nomad.sh -o install_nomad.sh && sudo bash install_nomad.sh
+sudo apt-get update && sudo apt-get install -y curl && curl -fsSL https://raw.githubusercontent.com/stormychel/project-nomad-macos/refs/heads/main/install/install_nomad.sh -o install_nomad.sh && sudo bash install_nomad.sh
 ```
 
 Project N.O.M.A.D. is now installed on your device! Open a browser and navigate to `http://localhost:8080` (or `http://DEVICE_IP:8080`) to start exploring!
@@ -61,7 +67,7 @@ Project N.O.M.A.D. is now installed on your device! Open a browser and navigate 
 ### Quick Install (macOS)
 Install Docker Desktop first, make sure it is running, then run:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/install_nomad.sh -o install_nomad.sh && bash install_nomad.sh
+curl -fsSL https://raw.githubusercontent.com/stormychel/project-nomad-macos/refs/heads/main/install/install_nomad.sh -o install_nomad.sh && bash install_nomad.sh
 ```
 
 On macOS, the installer targets the management stack and uses a user-writable default install directory. Linux-specific host integrations such as the disk collector and NVIDIA runtime checks are skipped.
@@ -81,7 +87,7 @@ Compatibility notes for macOS:
 For a complete step-by-step walkthrough (including Ubuntu installation), see the [Installation Guide](https://www.projectnomad.us/install).
 
 ### Advanced Installation
-For more control over the installation process, copy and paste the [Linux Docker Compose template](https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/management_compose.yaml) or the macOS template at [install/management_compose.macos.yaml](install/management_compose.macos.yaml) into a `docker-compose.yml` file and customize it to your liking (be sure to replace any placeholders with your actual values). Then, run `docker compose up -d` to start the Command Center and its dependencies. Note: this method is recommended for advanced users only, as it requires familiarity with Docker and manual configuration before starting.
+For more control over the installation process, copy and paste the [Linux Docker Compose template](https://raw.githubusercontent.com/stormychel/project-nomad-macos/refs/heads/main/install/management_compose.yaml) or the [macOS Docker Compose template](https://raw.githubusercontent.com/stormychel/project-nomad-macos/refs/heads/main/install/management_compose.macos.yaml) into a `docker-compose.yml` file and customize it to your liking (be sure to replace any placeholders with your actual values). Then, run `docker compose up -d` to start the Command Center and its dependencies. Note: this method is recommended for advanced users only, as it requires familiarity with Docker and manual configuration before starting.
 
 ## How It Works
 N.O.M.A.D. is a management UI ("Command Center") and API that orchestrates a collection of containerized tools and resources via [Docker](https://www.docker.com/). It handles installation, configuration, and updates for everything — so you don't have to.
@@ -162,6 +168,8 @@ Contributions are welcome and appreciated! Please see [CONTRIBUTING.md](CONTRIBU
 - **Website:** [www.projectnomad.us](https://www.projectnomad.us) - Learn more about the project
 - **Discord:** [Join the Community](https://discord.com/invite/crosstalksolutions) - Get help, share your builds, and connect with other NOMAD users
 - **Benchmark Leaderboard:** [benchmark.projectnomad.us](https://benchmark.projectnomad.us) - See how your hardware stacks up against other NOMAD builds
+- **macOS Fork Issues:** [stormychel/project-nomad-macos/issues](https://github.com/stormychel/project-nomad-macos/issues) - Report macOS fork bugs and maintenance issues
+- **Fork Maintainer:** [github.com/stormychel](https://github.com/stormychel) - Contact Michel Storms about this macOS-maintained fork
 - **Troubleshooting Guide:** [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Find solutions to common issues
 - **FAQ:** [FAQ.md](FAQ.md) - Find answers to frequently asked questions
 
@@ -209,9 +217,9 @@ bash ~/.project-nomad/update_nomad.sh
 ###### Uninstall Script - Need to start fresh? Use the uninstall script to make your life easy. Note: this cannot be undone!
 Debian/Linux:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/uninstall_nomad.sh -o uninstall_nomad.sh && sudo bash uninstall_nomad.sh
+curl -fsSL https://raw.githubusercontent.com/stormychel/project-nomad-macos/refs/heads/main/install/uninstall_nomad.sh -o uninstall_nomad.sh && sudo bash uninstall_nomad.sh
 ```
 macOS:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/uninstall_nomad.sh -o uninstall_nomad.sh && bash uninstall_nomad.sh
+curl -fsSL https://raw.githubusercontent.com/stormychel/project-nomad-macos/refs/heads/main/install/uninstall_nomad.sh -o uninstall_nomad.sh && bash uninstall_nomad.sh
 ```
